@@ -144,7 +144,7 @@ func main() {
 		if uiMode == modeGuest /*訪客模式*/ {
 			command := prompt.Input("Auth: Guest > ", welcomeCompleter)
 			switch command {
-			/*登入*/ case "login":
+			case "login" /*登入*/ :
 				//要求輸入帳號密碼
 				var uname string
 				fmt.Print("\n\t請輸入使用者名稱: ")
@@ -174,9 +174,9 @@ func main() {
 					fmt.Printf("\t[提示]：該帳戶已由其他裝置登入\n")
 				}
 				fmt.Printf("\t[成功登入]：歡迎%v。\n\t上次登入時間是：%v\n", user.username, lastSignIn)
+				denyTimes = 0
 				uiMode = modeUser
-				/*註冊*/
-			case "register":
+			case "register" /*註冊*/ :
 				//要求輸入帳號密碼
 				var uname string
 				var pw []byte
@@ -208,13 +208,11 @@ func main() {
 				}
 				createAccount(uname, pw)
 				fmt.Printf("\t使用者{%v}，註冊程序已完成，將跳轉回首頁\n", uname)
-				/*結束*/
-			case "bye":
-				//離開
+			case "bye" /*結束*/ :
+				//離開程式
 				fmt.Println("Bye!")
 				os.Exit(0)
-				/*未知指令*/
-			default:
+			default /*未知指令*/ :
 				fmt.Printf("%v : 系統無法辨識的指令，請使用tab重新確認\n", command)
 			}
 		} else if uiMode == modeUser /*使用者模式*/ {
@@ -255,26 +253,23 @@ func main() {
 			tips := fmt.Sprintf("Auth: [user]%v > ", user.username)
 			command := prompt.Input(tips, userCompleter)
 			switch command {
-			/*登出*/ case "logout":
+			case "logout" /*登出*/ :
 				user.logout()
 				uiMode = modeGuest
 				fmt.Printf("\t[成功登出]：期待使用者{%v}下次登入。\n", user.username)
 				continue
-				/*查詢*/
-			case "inquire":
+			case "inquire" /*查詢*/ :
 				// 顯示認證資料可查詢項目
 				user.updateFromTable()
 				fmt.Printf("\n\t使用者名稱：{%v}\n\t通行證：{無法查看}\n", user.username)
-				fmt.Printf("\t上次密碼時間：{%v}\n\t密碼到期日期：{%v}\n", user.lastChange, user.expireTime)
+				fmt.Printf("\t上次密碼更改：{%v}\n\t密碼到期日期：{%v}\n", user.lastChange, user.expireTime)
 				fmt.Printf("\t最近登入時間：{%v}\n\t登入裝置數量：{%v}\n", user.lastSignIn, user.loginTime)
-				/*結束*/
-			case "bye":
+			case "bye" /*結束*/ :
 				// 和登出動作一樣
 				user.logout()
 				fmt.Println("Bye!")
 				os.Exit(0)
-				/*未知指令*/
-			default:
+			default /*未知指令*/ :
 				fmt.Printf("%v : 系統無法辨識的指令，請使用tab重新確認\n", command)
 			}
 		}
@@ -379,4 +374,4 @@ func userCompleter(d prompt.Document) []prompt.Suggest {
 	return prompt.FilterHasPrefix(s, d.GetWordBeforeCursor(), true)
 }
 
-// Copyright (c) 2021 yuuR-Meow aka JunWeiLiao to Information Security Class
+// Copyright (c) 2021 yuuR-Meow aka JunWeiLiao for Information Security Class
