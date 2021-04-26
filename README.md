@@ -1,4 +1,4 @@
-# simple-file-based-multi-user-authentication
+# simple-file-base-muti-user-authentication
 
 ---
 
@@ -12,23 +12,23 @@
 
 + ### Create New User after Checking
 
-  ![image](https://github.com/yuuR-Meow/simple-file-base-muti-user-authentication/blob/main/sample_image/1.createUser.gif)
+  ![image](https://github.com/yuuR-Meow/simple-file-based-multi-user-authentication/blob/main/sample_image/1.createUser.gif)
 
 + ### Deny Toleration （3 times per application exercution）
 
-  ![image](https://github.com/yuuR-Meow/simple-file-base-muti-user-authentication/blob/main/sample_image/2.deny.gif)
+  ![image](https://github.com/yuuR-Meow/simple-file-based-multi-user-authentication/blob/main/sample_image/2.deny.gif)
 
 + ### Time for Password Expiration（３minutes default）
 
-  ![image](https://github.com/yuuR-Meow/simple-file-base-muti-user-authentication/blob/main/sample_image/3.login.gif)
+  ![image](https://github.com/yuuR-Meow/simple-file-based-multi-user-authentication/blob/main/sample_image/3.login.gif)
 
 + ### Repeat-Login and Warning
 
-  ![image](https://github.com/yuuR-Meow/simple-file-base-muti-user-authentication/blob/main/sample_image/4.relogin.gif)
+  ![image](https://github.com/yuuR-Meow/simple-file-based-multi-user-authentication/blob/main/sample_image/4.relogin.gif)
 
 + ### Input Password Without Display
 
-  ![image](https://github.com/yuuR-Meow/simple-file-base-muti-user-authentication/blob/main/sample_image/5.hiddenPW.png)
+  ![image](https://github.com/yuuR-Meow/simple-file-based-multi-user-authentication/blob/main/sample_image/5.hiddenPW.png)
 
 
 
