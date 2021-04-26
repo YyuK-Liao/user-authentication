@@ -1,4 +1,4 @@
-# simple-file-base-muti-user-authentication
+# simple-file-based-multi-user-authentication
 
 ---
 
