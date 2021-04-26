@@ -40,11 +40,13 @@
 
   username：password：lastChange：expired：lastLogin：connection
 
-  *（Actually, symbol '：' is halfwidth in file.）
+  ​	*	Actually, symbol '：' is halfwidth in file.
+
+  ​	*	Store time type is Unixnano.
 
 + **Password Hash**：
 
-  We choose SHA3-512 as our hash algorithm to hash user password. Then, encode the hash result to hexadecimal encoding.
+  SHA3-512 as hash algorithm, and encode to hexadecimal text.
 
 
 
