@@ -98,7 +98,7 @@ func (meta *uData) updateMeta() {
 	// 更新資料後全部寫回清空的原認證文件
 	authFile.Truncate(0)
 	authFile.Seek(0, 0)
-	reg := regexp.MustCompile(fmt.Sprintf("%v:(.*):(.*):(.*):(.*):(.*)", meta.username))
+	reg := regexp.MustCompile(fmt.Sprintf("(?m)^%v:.*:.*:.*:.*:.*", meta.username))
 	authFile.WriteString(reg.ReplaceAllString(string(authString), meta.String()))
 }
 
@@ -112,7 +112,7 @@ func (meta *uData) updateFromTable() {
 	authString, err := ioutil.ReadAll(authFile)
 	dealWith(err)
 	// 選擇對應資料列，實例化傳回
-	reg := regexp.MustCompile(fmt.Sprintf("%v:(.*):(.*):(.*):(.*):(.*)", meta.username))
+	reg := regexp.MustCompile(fmt.Sprintf("(?m)^%v:.*:.*:.*:.*:.*", meta.username))
 	tmp := covertToMetaData(reg.FindString(string(authString)))
 	meta.username = tmp.username
 	meta.passwordSH3 = tmp.passwordSH3
@@ -171,7 +171,7 @@ func main() {
 					os.Exit(0)
 				} else if err == errReLogIn {
 					// 重複登入處理
-					fmt.Printf("\t[提示]：該帳戶已由其他裝置登入\n")
+					fmt.Printf("\t\033[93m[提示]：該帳戶已由其他裝置登入\033[m\n")
 				}
 				fmt.Printf("\t[成功登入]：歡迎%v。\n\t上次登入時間是：%v\n", user.username, lastSignIn)
 				denyTimes = 0
@@ -220,8 +220,8 @@ func main() {
 			user.updateFromTable()
 			if user.expireTime.Before(time.Now()) {
 				// 如果到期，強制修改密碼
-				fmt.Printf("\t\033[91m[Caution]現在時間：{%v}\n", time.Now())
-				fmt.Printf("\t[Caution]到期時間：{%v}\n", user.expireTime)
+				fmt.Printf("\t\033[91m[Caution]現在時間：{%v}\n", time.Now().Round(0))
+				fmt.Printf("\t[Caution]到期時間：{%v}\n", user.expireTime.Round(0))
 				fmt.Println("\t[Caution]密碼已到期，請更改\033[m")
 				for {
 					// 要求新的密碼
@@ -241,7 +241,7 @@ func main() {
 					// 更新密碼
 					user.updatePassword(npw)
 					user.updateMeta()
-					fmt.Printf("\t\033[93m密碼已更新完畢，下個到期日為：{%v}\033[m\n", user.expireTime)
+					fmt.Printf("\t\033[93m密碼已更新完畢，下個到期日為：{%v}\033[m\n", user.expireTime.Round(0))
 					fmt.Println()
 					break
 				}
@@ -262,8 +262,8 @@ func main() {
 				// 顯示認證資料可查詢項目
 				user.updateFromTable()
 				fmt.Printf("\n\t使用者名稱：{%v}\n\t通行證：{無法查看}\n", user.username)
-				fmt.Printf("\t上次密碼更改：{%v}\n\t密碼到期日期：{%v}\n", user.lastChange, user.expireTime)
-				fmt.Printf("\t最近登入時間：{%v}\n\t登入裝置數量：{%v}\n", user.lastSignIn, user.loginTime)
+				fmt.Printf("\t上次密碼更改：{%v}\n\t密碼到期日期：{%v}\n", user.lastChange.Round(0), user.expireTime.Round(0))
+				fmt.Printf("\t最近登入時間：{%v}\n\t登入裝置數量：{%v}\n", user.lastSignIn.Round(0), user.loginTime)
 			case "bye" /*結束*/ :
 				// 和登出動作一樣
 				user.logout()
