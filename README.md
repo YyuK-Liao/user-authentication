@@ -38,7 +38,7 @@
 
 + **Field In File	"user_auth.dat"**：
 
-  username：password：lastChange：expired：lastLogin：connection
+  > username：password：lastChange：expired：lastLogin：connection
 
   ​	*	Actually, symbol '：' is halfwidth in file.
 
