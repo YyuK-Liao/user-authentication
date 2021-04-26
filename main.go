@@ -159,21 +159,21 @@ func main() {
 				user, lastSignIn, err = logIn(uname, pw)
 				if err == errDenyAccess {
 					// 使用者名稱或密碼錯誤
-					fmt.Println("\t", err.Error())
+					fmt.Printf("\t\033[93m%v\n", err.Error())
 					denyTimes++
 					if denyTimes < 3 {
 						// 3次內錯誤處理
-						fmt.Printf("\t目前已連續失敗%v次，達到3次會強制退出\n", denyTimes)
+						fmt.Printf("\t目前已連續失敗%v次，達到3次會強制退出\033[m\n", denyTimes)
 						continue
 					}
 					// 錯誤超過容忍
-					fmt.Printf("\t目前已連續失敗達到3次，強制退出用戶\n")
+					fmt.Printf("\t\033[91m目前已連續失敗達到3次，強制退出客戶端\033[m\n")
 					os.Exit(0)
 				} else if err == errReLogIn {
 					// 重複登入處理
 					fmt.Printf("\t\033[93m[提示]：該帳戶已由其他裝置登入\033[m\n")
 				}
-				fmt.Printf("\t[成功登入]：歡迎%v。\n\t上次登入時間是：%v\n", user.username, lastSignIn)
+				fmt.Printf("\t\033[93m[成功登入]：歡迎%v。\n\t上次登入時間是：%v\033[m\n", user.username, lastSignIn)
 				denyTimes = 0
 				uiMode = modeUser
 			case "register" /*註冊*/ :
@@ -185,7 +185,7 @@ func main() {
 					fmt.Scanf("%v\n", &uname)
 					existed, _ := existedAccount(uname)
 					if existed {
-						fmt.Printf("\t使用者名稱{%v}已經被註冊\n", uname)
+						fmt.Printf("\t\033[91m使用者名稱{%v}已經被註冊\033[m\n", uname)
 						continue
 					}
 					break
@@ -197,7 +197,7 @@ func main() {
 					dealWith(err)
 					fmt.Println()
 					if weakPW(pw) {
-						fmt.Printf("\t%v\n\t\t%v\n\t\t%v\n\t\t%v\n",
+						fmt.Printf("\033[91m\t%v\n\t\t%v\n\t\t%v\n\t\t%v\n\033[m",
 							"該密碼強度不足，須滿足",
 							"(1).長度要達到8",
 							"(2).密碼須包含英文大寫",
@@ -207,7 +207,7 @@ func main() {
 					break
 				}
 				createAccount(uname, pw)
-				fmt.Printf("\t使用者{%v}，註冊程序已完成，將跳轉回首頁\n", uname)
+				fmt.Printf("\t\033[93m使用者{%v}，註冊程序已完成，將跳轉回首頁\033[m\n", uname)
 			case "bye" /*結束*/ :
 				//離開程式
 				fmt.Println("Bye!")
@@ -231,7 +231,7 @@ func main() {
 					dealWith(err)
 					fmt.Println()
 					if weakPW(npw) {
-						fmt.Printf("\t%v\n\t\t%v\n\t\t%v\n\t\t%v\n",
+						fmt.Printf("\033[91m\t%v\n\t\t%v\n\t\t%v\n\t\t%v\n\033[m",
 							"該密碼強度不足，須滿足",
 							"(1).長度要達到8",
 							"(2).密碼須包含英文大寫",
@@ -256,7 +256,7 @@ func main() {
 			case "logout" /*登出*/ :
 				user.logout()
 				uiMode = modeGuest
-				fmt.Printf("\t[成功登出]：期待使用者{%v}下次登入。\n", user.username)
+				fmt.Printf("\t\033[93m[成功登出]：期待使用者{%v}下次登入。\033[m\n", user.username)
 				continue
 			case "inquire" /*查詢*/ :
 				// 顯示認證資料可查詢項目
