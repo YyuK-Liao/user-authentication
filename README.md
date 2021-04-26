@@ -32,7 +32,7 @@
 
 
 
-## How to store user date?
+## About User Data?
 
 ---
 
@@ -48,7 +48,12 @@
 
   SHA3-512 as hash algorithm, and encode to hexadecimal text.
 
++ **Password Limits**
 
+  1. length over 8
+  2. include Lower and Upper Case
+
+  
 
 ## Main Test Platform
 
