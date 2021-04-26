@@ -136,7 +136,7 @@ func main() {
 		user      *uData
 	)
 	fmt.Println("\033[33mSmall Authentication")
-	fmt.Println("Copyright (c) 2021 yuuR-Meow aka JunWeiLiao to Information Security Class")
+	fmt.Println("Copyright (c) 2021 yuuR-Meow aka JunWeiLiao for Information Security Class")
 	fmt.Println("\nThe source code has been uploaded to github.")
 	fmt.Println("https://github.com/yuuR-Meow/simple-file-base-muti-user-authentication\033[m")
 	for {
