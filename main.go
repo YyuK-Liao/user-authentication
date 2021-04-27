@@ -33,7 +33,7 @@ var (
 	h     = sha3.New512()
 	rule1 = regexp.MustCompile(`[a-z]`)
 	rule2 = regexp.MustCompile(`[A-Z]`)
-	rule3 = regexp.MustCompile(`.{8,}`)
+	rule3 = regexp.MustCompile(`\S{8,}`)
 )
 
 // uData : 認證功能的儲存類別
