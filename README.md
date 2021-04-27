@@ -72,4 +72,17 @@ yuuR-Meow	a.k.a.	JunWei Liao
 
 ---
 
-Baic MIT licence. 
+Basic MIT licence. 
+
+
+
+## Caution
+
+---
+
+This system doesn't filter or encode username, symbol like： 
+  + ':'
+  + space like '\r', '\n', '\b'...
+will easily make system broken.
+
+And don't worry about password, it saved as hex code.
