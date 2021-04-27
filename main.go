@@ -98,7 +98,7 @@ func (meta *uData) updateMeta() {
 	// 更新資料後全部寫回清空的原認證文件
 	authFile.Truncate(0)
 	authFile.Seek(0, 0)
-	reg := regexp.MustCompile(fmt.Sprintf("(?m)^%v:.*:.*:.*:.*:.*", meta.username))
+	reg := regexp.MustCompile(fmt.Sprintf("(?m)^%v:\\S*:\\S*:\\S*:\\S*:\\S*", meta.username))
 	authFile.WriteString(reg.ReplaceAllString(string(authString), meta.String()))
 }
 
@@ -112,7 +112,7 @@ func (meta *uData) updateFromTable() {
 	authString, err := ioutil.ReadAll(authFile)
 	dealWith(err)
 	// 選擇對應資料列，實例化傳回
-	reg := regexp.MustCompile(fmt.Sprintf("(?m)^%v:.*:.*:.*:.*:.*", meta.username))
+	reg := regexp.MustCompile(fmt.Sprintf("(?m)^%v:\\S*:\\S*:\\S*:\\S*:\\S*", meta.username))
 	tmp := covertToMetaData(reg.FindString(string(authString)))
 	meta.username = tmp.username
 	meta.passwordSH3 = tmp.passwordSH3
